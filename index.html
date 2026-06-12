@@ -751,32 +751,52 @@ img{display:block;max-width:100%}
 </div><!-- /.l-page -->
 
 <!-- ===== LEAD MAGNET MODAL ===== -->
+<style>
+/* Kit embed overrides dentro del modal */
+#lm-overlay .formkit-form { background: transparent !important; border: none !important; padding: 0 !important; box-shadow: none !important; }
+#lm-overlay .formkit-form * { font-family: 'Archivo', system-ui, sans-serif !important; }
+#lm-overlay .formkit-field input,
+#lm-overlay .formkit-form input[type=email],
+#lm-overlay .formkit-form input[type=text] {
+  background: var(--ink-800) !important;
+  border: 1px solid rgba(238,241,245,0.16) !important;
+  border-radius: 10px !important;
+  color: #EEF1F5 !important;
+  padding: 0.75rem 1rem !important;
+  font-size: 0.9375rem !important;
+  width: 100% !important;
+  box-shadow: none !important;
+}
+#lm-overlay .formkit-form input::placeholder { color: rgba(238,241,245,0.35) !important; }
+#lm-overlay .formkit-submit, #lm-overlay .formkit-form button[type=submit] {
+  background: #C9E63B !important;
+  color: #181B20 !important;
+  font-weight: 700 !important;
+  font-size: 0.9375rem !important;
+  border-radius: 999px !important;
+  padding: 0.875rem 2rem !important;
+  border: none !important;
+  width: 100% !important;
+  cursor: pointer !important;
+  box-shadow: none !important;
+  letter-spacing: -0.01em !important;
+}
+#lm-overlay .formkit-submit:hover { background: #D7ED5C !important; }
+#lm-overlay .formkit-guarantee, #lm-overlay .formkit-powered-by-convertkit-container { display: none !important; }
+#lm-overlay .formkit-header, #lm-overlay .formkit-subheader { display: none !important; }
+#lm-overlay .formkit-fields { display: grid; gap: 1rem; }
+#lm-overlay [data-style=full] { width: 100% !important; min-width: unset !important; max-width: unset !important; }
+</style>
 <div id="lm-overlay" role="dialog" aria-modal="true" aria-labelledby="lm-title" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(24,27,32,0.72);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:var(--space-5)">
   <div style="background:var(--ink-900);border:1px solid var(--border-on-ink);border-radius:var(--radius-xl);max-width:520px;width:100%;padding:clamp(2rem,5vw,3rem);position:relative;box-shadow:var(--shadow-pop)">
     <button onclick="closeLmModal()" aria-label="Cerrar" style="position:absolute;top:1.25rem;right:1.25rem;background:none;border:none;cursor:pointer;color:var(--text-on-ink-muted);padding:0.25rem;line-height:1;font-size:1.5rem">&times;</button>
     <span style="font-family:var(--font-mono);font-size:var(--fs-label);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--lime-400);display:block;margin-bottom:var(--space-4)">Recurso gratuito</span>
     <h2 id="lm-title" style="font-size:var(--fs-h3);color:var(--gray-50);line-height:var(--lh-heading);margin-bottom:var(--space-3)">El prompt que usamos para definir el ADN de una marca en 30 minutos</h2>
     <p style="color:var(--text-on-ink-muted);font-size:var(--fs-sm);margin-bottom:var(--space-6)">Más la técnica y la guía paso a paso. Todo gratis, directo a tu correo.</p>
-    <form id="lm-form" onsubmit="submitLmForm(event)" style="display:grid;gap:var(--space-4)">
-      <div>
-        <label for="lm-name" style="display:block;font-size:var(--fs-xs);font-weight:var(--fw-medium);color:var(--text-on-ink-muted);margin-bottom:var(--space-2);letter-spacing:var(--ls-label);text-transform:uppercase">Nombre</label>
-        <input id="lm-name" name="fields[first_name]" type="text" placeholder="Tu nombre" autocomplete="given-name" style="width:100%;background:var(--ink-800);border:1px solid var(--border-on-ink);border-radius:var(--radius-sm);padding:0.75rem 1rem;color:var(--gray-50);font-family:var(--font-body);font-size:var(--fs-sm);outline:none;transition:border-color var(--dur-fast)" onfocus="this.style.borderColor='var(--lime-400)'" onblur="this.style.borderColor='var(--border-on-ink)'" />
-      </div>
-      <div>
-        <label for="lm-email" style="display:block;font-size:var(--fs-xs);font-weight:var(--fw-medium);color:var(--text-on-ink-muted);margin-bottom:var(--space-2);letter-spacing:var(--ls-label);text-transform:uppercase">Correo electrónico <span style="color:var(--lime-400)">*</span></label>
-        <input id="lm-email" name="email_address" type="email" required placeholder="tu@correo.com" autocomplete="email" style="width:100%;background:var(--ink-800);border:1px solid var(--border-on-ink);border-radius:var(--radius-sm);padding:0.75rem 1rem;color:var(--gray-50);font-family:var(--font-body);font-size:var(--fs-sm);outline:none;transition:border-color var(--dur-fast)" onfocus="this.style.borderColor='var(--lime-400)'" onblur="this.style.borderColor='var(--border-on-ink)'" />
-      </div>
-      <p id="lm-error" style="display:none;color:#f87171;font-size:var(--fs-xs);margin:0"></p>
-      <button id="lm-btn" type="submit" style="background:var(--lime-500);color:var(--ink-900);font-family:var(--font-body);font-size:var(--fs-sm);font-weight:var(--fw-bold);border:none;border-radius:var(--radius-pill);padding:0.875rem 2rem;cursor:pointer;transition:background var(--dur-fast);letter-spacing:-0.01em" onmouseover="this.style.background='var(--lime-400)'" onmouseout="this.style.background='var(--lime-500)'">Quiero el kit gratis →</button>
-    </form>
-    <p style="color:var(--text-on-ink-muted);font-size:var(--fs-xs);margin-top:var(--space-4);text-align:center">Sin spam. Te puedes dar de baja cuando quieras.</p>
+    <!-- Formulario de Kit (se renderiza aquí) -->
+    <script async data-uid="eaa749822d" src="https://valentina-herrera.kit.com/eaa749822d/index.js"></script>
   </div>
 </div>
-<iframe id="kit-iframe" name="kit-iframe" style="display:none" aria-hidden="true"></iframe>
-<form id="kit-hidden-form" method="POST" action="https://app.convertkit.com/forms/eaa749822d/subscriptions" target="kit-iframe" style="display:none" aria-hidden="true">
-  <input id="kit-email-field" type="email" name="email_address" />
-  <input id="kit-name-field" type="text" name="fields[first_name]" />
-</form>
 
 <script>
 // Sticky nav
@@ -828,27 +848,6 @@ function closeMobileMenu() {
 function closeLmModal() {
   document.getElementById('lm-overlay').style.display = 'none';
   document.body.style.overflow = '';
-}
-
-function submitLmForm(e) {
-  e.preventDefault();
-  var btn = document.getElementById('lm-btn');
-  var errEl = document.getElementById('lm-error');
-  var email = document.getElementById('lm-email').value.trim();
-  var firstName = document.getElementById('lm-name').value.trim();
-  btn.disabled = true;
-  btn.textContent = 'Enviando…';
-  errEl.style.display = 'none';
-
-  // Rellena y envía el formulario oculto de Kit
-  var kitEmail = document.getElementById('kit-email-field');
-  var kitName = document.getElementById('kit-name-field');
-  kitEmail.value = email;
-  if (kitName) kitName.value = firstName;
-  document.getElementById('kit-hidden-form').submit();
-
-  // Redirige mientras Kit procesa en el iframe
-  setTimeout(function(){ window.location.href = '/descargable'; }, 1000);
 }
 
 // Form
