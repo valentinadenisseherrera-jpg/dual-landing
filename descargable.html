@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kit de Estrategia de Marca con IA — Dual Comunicaciones</title>
+<meta name="description" content="Tu kit gratuito: la técnica, el prompt y la guía para definir el ADN de tu marca con IA en 30 minutos." />
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --gray-50:#FFFFFF; --gray-100:#F5F7FA; --gray-200:#ECEFF3; --gray-300:#DFE4EA; --gray-400:#C6CDD7;
+  --ink-900:#181B20; --ink-800:#23272E; --ink-700:#353A43; --ink-500:#5B626D; --ink-400:#868E99;
+  --lime-100:#F3F9D6; --lime-200:#E8F4A6; --lime-400:#D7ED5C; --lime-500:#C9E63B; --lime-600:#A8C528;
+  --blue-500:#4F8BDC; --blue-600:#3A6FBE;
+  --font-display:'Archivo',system-ui,sans-serif;
+  --font-body:'Archivo',system-ui,sans-serif;
+  --font-mono:'Space Mono',ui-monospace,'SFMono-Regular',monospace;
+  --fs-mega:clamp(2.5rem,7vw,5.5rem);
+  --fs-h2:clamp(1.6rem,2.6vw,2.4rem); --fs-h3:clamp(1.3rem,1.8vw,1.7rem); --fs-h4:1.2rem;
+  --fs-lead:clamp(1rem,1.3vw,1.25rem); --fs-body:1.0625rem; --fs-sm:0.9375rem; --fs-xs:0.8125rem;
+  --fs-label:0.6875rem;
+  --lh-snug:1.04; --lh-heading:1.12; --lh-body:1.58;
+  --ls-heading:-0.015em; --ls-label:0.16em; --ls-mono:0.03em;
+  --space-3:0.75rem; --space-4:1rem; --space-5:1.5rem; --space-6:2rem;
+  --space-7:3rem; --space-8:4rem; --space-section:clamp(2.5rem,5vw,4.5rem);
+  --radius-sm:10px; --radius-md:16px; --radius-lg:20px; --radius-pill:999px;
+  --shadow-card:0 1px 2px rgba(35,26,15,0.04),0 14px 40px rgba(35,26,15,0.07);
+  --container-max:760px; --container-pad:clamp(1.25rem,4vw,2.5rem);
+  --ease-out:cubic-bezier(0.22,0.61,0.36,1); --dur-fast:160ms;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--gray-100);color:var(--ink-900);font-family:var(--font-body);font-size:var(--fs-body);line-height:var(--lh-body);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:var(--lh-heading);letter-spacing:var(--ls-heading);margin:0;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+.wrap {
+  max-width:var(--container-max);
+  margin:0 auto;
+  padding:0 var(--container-pad);
+}
+
+/* ---- Header ---- */
+.site-header {
+  background:var(--ink-900);
+  padding:1.25rem var(--container-pad);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.site-header a {
+  color:rgba(238,241,245,0.55);
+  font-size:var(--fs-xs);
+  font-weight:500;
+  letter-spacing:0.04em;
+  transition:color var(--dur-fast);
+}
+.site-header a:hover { color:#EEF1F5; }
+
+/* ---- Hero ---- */
+.hero {
+  background:var(--ink-900);
+  color:#EEF1F5;
+  padding:clamp(3rem,7vw,6rem) var(--container-pad) clamp(2.5rem,5vw,4rem);
+  text-align:center;
+}
+.hero .eyebrow {
+  display:inline-block;
+  background:var(--lime-500);
+  color:var(--ink-900);
+  font-family:var(--font-mono);
+  font-size:var(--fs-label);
+  font-weight:700;
+  letter-spacing:var(--ls-label);
+  text-transform:uppercase;
+  padding:0.35rem 0.9rem;
+  border-radius:var(--radius-pill);
+  margin-bottom:var(--space-5);
+}
+.hero h1 {
+  font-size:var(--fs-mega);
+  line-height:var(--lh-snug);
+  letter-spacing:-0.025em;
+  max-width:640px;
+  margin:0 auto var(--space-5);
+}
+.hero p {
+  color:rgba(238,241,245,0.65);
+  font-size:var(--fs-lead);
+  max-width:520px;
+  margin:0 auto;
+}
+
+/* ---- Content sections ---- */
+.content {
+  padding:var(--space-section) var(--container-pad);
+}
+.section {
+  background:#fff;
+  border-radius:var(--radius-lg);
+  padding:clamp(2rem,4vw,3rem);
+  margin-bottom:var(--space-6);
+  box-shadow:var(--shadow-card);
+}
+.section-number {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:2rem;
+  height:2rem;
+  background:var(--lime-200);
+  color:var(--ink-900);
+  font-family:var(--font-mono);
+  font-size:var(--fs-xs);
+  font-weight:700;
+  border-radius:50%;
+  margin-bottom:var(--space-4);
+}
+.section-tag {
+  font-family:var(--font-mono);
+  font-size:var(--fs-label);
+  letter-spacing:var(--ls-label);
+  text-transform:uppercase;
+  color:var(--ink-500);
+  display:block;
+  margin-bottom:var(--space-3);
+}
+.section h2 {
+  font-size:var(--fs-h3);
+  margin-bottom:var(--space-5);
+}
+
+/* Skill steps */
+.steps {
+  display:grid;
+  gap:var(--space-5);
+  margin-top:var(--space-5);
+}
+.step {
+  display:grid;
+  grid-template-columns:2.5rem 1fr;
+  gap:var(--space-4);
+  align-items:start;
+}
+.step-num {
+  width:2.5rem;
+  height:2.5rem;
+  background:var(--ink-900);
+  color:#EEF1F5;
+  font-family:var(--font-mono);
+  font-size:var(--fs-xs);
+  font-weight:700;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  margin-top:0.15rem;
+}
+.step-body h4 {
+  font-size:var(--fs-sm);
+  font-weight:700;
+  margin-bottom:var(--space-2);
+}
+.step-body p {
+  font-size:var(--fs-sm);
+  color:var(--ink-700);
+  line-height:var(--lh-body);
+}
+
+/* Prompt block */
+.prompt-wrap {
+  position:relative;
+  background:var(--ink-900);
+  border-radius:var(--radius-md);
+  padding:clamp(1.5rem,3vw,2rem);
+  margin-top:var(--space-5);
+}
+.prompt-wrap pre {
+  font-family:var(--font-mono);
+  font-size:0.8125rem;
+  line-height:1.65;
+  letter-spacing:var(--ls-mono);
+  color:#D7ED5C;
+  margin:0;
+  white-space:pre-wrap;
+  word-break:break-word;
+}
+.copy-btn {
+  position:absolute;
+  top:1rem;
+  right:1rem;
+  background:rgba(238,241,245,0.08);
+  border:1px solid rgba(238,241,245,0.15);
+  border-radius:var(--radius-sm);
+  color:rgba(238,241,245,0.7);
+  font-family:var(--font-mono);
+  font-size:0.7rem;
+  font-weight:700;
+  letter-spacing:0.05em;
+  padding:0.35rem 0.75rem;
+  cursor:pointer;
+  transition:background var(--dur-fast), color var(--dur-fast);
+}
+.copy-btn:hover { background:rgba(238,241,245,0.15); color:#EEF1F5; }
+
+/* Guide list */
+.guide-steps {
+  list-style:none;
+  margin:var(--space-5) 0 0;
+  padding:0;
+  display:grid;
+  gap:var(--space-4);
+  counter-reset:guide;
+}
+.guide-steps li {
+  counter-increment:guide;
+  display:grid;
+  grid-template-columns:2rem 1fr;
+  gap:var(--space-4);
+  align-items:start;
+  font-size:var(--fs-sm);
+  color:var(--ink-700);
+  line-height:var(--lh-body);
+}
+.guide-steps li::before {
+  content:counter(guide);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:2rem;
+  height:2rem;
+  background:var(--lime-200);
+  color:var(--ink-900);
+  font-family:var(--font-mono);
+  font-size:var(--fs-xs);
+  font-weight:700;
+  border-radius:50%;
+  flex-shrink:0;
+  margin-top:0.1rem;
+}
+.guide-steps strong { color:var(--ink-900); }
+
+/* CTA section */
+.cta-section {
+  background:var(--lime-500);
+  border-radius:var(--radius-lg);
+  padding:clamp(2rem,4vw,3rem);
+  margin-bottom:var(--space-8);
+  text-align:center;
+}
+.cta-section h2 {
+  font-size:var(--fs-h3);
+  color:var(--ink-900);
+  margin-bottom:var(--space-4);
+}
+.cta-section p {
+  color:var(--ink-700);
+  font-size:var(--fs-sm);
+  margin-bottom:var(--space-6);
+}
+.btn-dark {
+  display:inline-block;
+  background:var(--ink-900);
+  color:#EEF1F5;
+  font-family:var(--font-body);
+  font-size:var(--fs-sm);
+  font-weight:700;
+  border-radius:var(--radius-pill);
+  padding:0.875rem 2rem;
+  transition:background var(--dur-fast);
+  letter-spacing:-0.01em;
+}
+.btn-dark:hover { background:var(--ink-800); }
+
+/* Footer */
+.mini-footer {
+  background:var(--ink-900);
+  text-align:center;
+  padding:2rem var(--container-pad);
+}
+.mini-footer a {
+  color:rgba(238,241,245,0.45);
+  font-size:var(--fs-xs);
+  transition:color var(--dur-fast);
+}
+.mini-footer a:hover { color:#EEF1F5; }
+
+@media (max-width:600px) {
+  .step { grid-template-columns:1fr; }
+  .step-num { display:none; }
+  .copy-btn { position:static; display:block; margin-top:var(--space-4); width:max-content; }
+  .prompt-wrap { padding:1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/">
+    <img src="/assets/logo/dual-wordmark-white.png" alt="Dual Comunicaciones" height="28" style="height:28px;width:auto" />
+  </a>
+  <a href="/">← Volver al sitio</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Kit gratuito</span>
+    <h1>Tu kit de estrategia de marca con IA</h1>
+    <p>La técnica, el prompt y la guía que usamos en DUAL para definir el ADN de una marca en menos de 30 minutos.</p>
+  </div>
+</section>
+
+<div class="content wrap">
+
+  <!-- SECCIÓN 1: La Skill -->
+  <div class="section">
+    <span class="section-tag">La técnica</span>
+    <h2>El método de los 3 espejos</h2>
+    <p style="color:var(--ink-700);font-size:var(--fs-sm)">
+      El error más común al definir una marca es hacerlo desde adentro — desde lo que la empresa cree que es. Esta técnica te obliga a ver la marca desde tres ángulos distintos para encontrar el punto donde todos convergen: tu posicionamiento real.
+    </p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Espejo interno — ¿Qué promete la marca?</h4>
+          <p>Define qué hace la marca, para quién lo hace y por qué lo hace mejor que cualquier otra. Sin marketing: solo hechos y ventajas reales. Este es el punto de partida honesto.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Espejo externo — ¿Qué percibe la audiencia?</h4>
+          <p>Revisa reseñas, comentarios, mensajes directos y lo que dicen tus clientes (o los de la competencia). Lo que la gente dice es más poderoso que cualquier misión redactada en una sala de juntas.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Espejo lateral — ¿Dónde hay espacio sin ocupar?</h4>
+          <p>Mapea a tus competidores directos e indirectos. Identifica los territorios de posicionamiento que nadie está reclamando. Ahí está la oportunidad.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN 2: El Prompt -->
+  <div class="section">
+    <span class="section-tag">El prompt</span>
+    <h2>Cópialo y pégalo directamente en Claude o ChatGPT</h2>
+    <p style="color:var(--ink-700);font-size:var(--fs-sm)">Completa los campos entre corchetes con información real de tu marca. Mientras más específico seas, mejor será el resultado.</p>
+    <div class="prompt-wrap">
+      <button class="copy-btn" onclick="copyPrompt(this)" aria-label="Copiar prompt">COPIAR</button>
+      <pre id="prompt-text">Actúa como un estratega de marca senior con experiencia en posicionamiento para mercados latinoamericanos.
+
+Voy a darte información sobre una marca y quiero que apliques el método de los 3 espejos para ayudarme a definir su posicionamiento.
+
+## Información de la marca
+- Nombre: [nombre de la marca]
+- Categoría / industria: [ej. moda sostenible, bebidas funcionales, servicios B2B de tecnología]
+- Qué hace exactamente: [descripción clara en 2-3 oraciones]
+- A quién va dirigida: [perfil del cliente ideal, incluyendo edad, contexto, motivaciones]
+- Por qué existe (propósito): [qué problema resuelve o qué aspiración satisface]
+- Ventaja principal sobre la competencia: [qué hace diferente o mejor]
+
+## Lo que dicen los clientes (espejo externo)
+Comparte 3 a 5 frases reales o representativas de cómo los clientes describen la marca, el producto o la experiencia. Pueden ser reseñas, comentarios en redes, o frases que hayas escuchado directamente:
+1. "[frase 1]"
+2. "[frase 2]"
+3. "[frase 3]"
+
+## Competidores principales (espejo lateral)
+Lista 3 a 5 marcas con las que compites directa o indirectamente, y describe en una línea cómo se posicionan:
+- [Competidor 1]: [cómo se posiciona]
+- [Competidor 2]: [cómo se posiciona]
+- [Competidor 3]: [cómo se posiciona]
+
+---
+
+Con esta información, por favor:
+
+1. **Sintetiza el posicionamiento actual** de la marca en 2-3 oraciones (cómo la perciben hoy vs. cómo se percibe a sí misma).
+2. **Identifica el territorio vacío**: ¿qué posición de marca nadie está ocupando en este mercado?
+3. **Propón 3 posibles ángulos de posicionamiento** diferenciado, cada uno con: nombre del ángulo, propuesta de valor en una línea, y tono de marca sugerido.
+4. **Recomienda un ángulo** y justifica por qué es el más sólido para esta marca específica.
+5. **Escribe una frase de posicionamiento** (tipo tagline interno, no necesariamente para publicidad) que capture la esencia elegida en menos de 12 palabras.</pre>
+    </div>
+  </div>
+
+  <!-- SECCIÓN 3: La Guía -->
+  <div class="section">
+    <span class="section-tag">La guía</span>
+    <h2>Cómo usar este prompt en 5 pasos</h2>
+    <ol class="guide-steps">
+      <li><span><strong>Reúne la información antes de empezar.</strong> No improvises las respuestas dentro del prompt. Dedica 10 minutos a recopilar reseñas reales, revisar los perfiles de competidores y anotar lo que sabes de tu cliente. La calidad del output depende de la calidad del input.</span></li>
+      <li><span><strong>Copia el prompt completo y pégalo en una conversación nueva.</strong> Usa Claude o ChatGPT (cualquier versión). No lo fragmentes — funciona mejor como un solo bloque de contexto.</span></li>
+      <li><span><strong>Completa todos los campos entre corchetes.</strong> Si no tienes información de algún campo, escribe "no tengo esta información aún" en lugar de dejarlo vacío. El modelo sabrá trabajar con lo que hay.</span></li>
+      <li><span><strong>Lee los 3 ángulos de posicionamiento con ojo crítico.</strong> La IA propone opciones, tú decides. Pregúntate: ¿cuál de estos ángulos podemos sostener de verdad con lo que hacemos hoy? ¿Cuál nos emociona y también tiene sentido para el mercado?</span></li>
+      <li><span><strong>Refina con preguntas de seguimiento.</strong> Una vez que elijas un ángulo, sigue la conversación: pide mensajes clave, un tono de voz, ideas de contenido o un pitch de una línea. El prompt es el punto de partida, no el final.</span></li>
+    </ol>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h2>¿Quieres que DUAL lo haga contigo?</h2>
+    <p>Aplicamos este método y mucho más en sesiones de estrategia de marca intensivas. Trabajamos contigo para definir el posicionamiento, el tono y la narrativa de tu marca desde cero.</p>
+    <a href="/#contacto" class="btn-dark">Hablemos →</a>
+  </div>
+
+</div>
+
+<footer class="mini-footer">
+  <a href="/">© 2025 Dual Comunicaciones — Bogotá, LATAM</a>
+</footer>
+
+<script>
+function copyPrompt(btn) {
+  var text = document.getElementById('prompt-text').textContent;
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = '✓ COPIADO';
+    setTimeout(function() { btn.textContent = 'COPIAR'; }, 2000);
+  }).catch(function() {
+    btn.textContent = 'ERROR';
+    setTimeout(function() { btn.textContent = 'COPIAR'; }, 2000);
+  });
+}
+</script>
+</body>
+</html>

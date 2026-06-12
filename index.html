@@ -750,6 +750,29 @@ img{display:block;max-width:100%}
 
 </div><!-- /.l-page -->
 
+<!-- ===== LEAD MAGNET MODAL ===== -->
+<div id="lm-overlay" role="dialog" aria-modal="true" aria-labelledby="lm-title" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(24,27,32,0.72);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:var(--space-5)">
+  <div style="background:var(--ink-900);border:1px solid var(--border-on-ink);border-radius:var(--radius-xl);max-width:520px;width:100%;padding:clamp(2rem,5vw,3rem);position:relative;box-shadow:var(--shadow-pop)">
+    <button onclick="closeLmModal()" aria-label="Cerrar" style="position:absolute;top:1.25rem;right:1.25rem;background:none;border:none;cursor:pointer;color:var(--text-on-ink-muted);padding:0.25rem;line-height:1;font-size:1.5rem">&times;</button>
+    <span style="font-family:var(--font-mono);font-size:var(--fs-label);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--lime-400);display:block;margin-bottom:var(--space-4)">Recurso gratuito</span>
+    <h2 id="lm-title" style="font-size:var(--fs-h3);color:var(--gray-50);line-height:var(--lh-heading);margin-bottom:var(--space-3)">El prompt que usamos para definir el ADN de una marca en 30 minutos</h2>
+    <p style="color:var(--text-on-ink-muted);font-size:var(--fs-sm);margin-bottom:var(--space-6)">Más la técnica y la guía paso a paso. Todo gratis, directo a tu correo.</p>
+    <form id="lm-form" onsubmit="submitLmForm(event)" style="display:grid;gap:var(--space-4)">
+      <div>
+        <label for="lm-name" style="display:block;font-size:var(--fs-xs);font-weight:var(--fw-medium);color:var(--text-on-ink-muted);margin-bottom:var(--space-2);letter-spacing:var(--ls-label);text-transform:uppercase">Nombre</label>
+        <input id="lm-name" name="first_name" type="text" placeholder="Tu nombre" autocomplete="given-name" style="width:100%;background:var(--ink-800);border:1px solid var(--border-on-ink);border-radius:var(--radius-sm);padding:0.75rem 1rem;color:var(--gray-50);font-family:var(--font-body);font-size:var(--fs-sm);outline:none;transition:border-color var(--dur-fast)" onfocus="this.style.borderColor='var(--lime-400)'" onblur="this.style.borderColor='var(--border-on-ink)'" />
+      </div>
+      <div>
+        <label for="lm-email" style="display:block;font-size:var(--fs-xs);font-weight:var(--fw-medium);color:var(--text-on-ink-muted);margin-bottom:var(--space-2);letter-spacing:var(--ls-label);text-transform:uppercase">Correo electrónico <span style="color:var(--lime-400)">*</span></label>
+        <input id="lm-email" name="email" type="email" required placeholder="tu@correo.com" autocomplete="email" style="width:100%;background:var(--ink-800);border:1px solid var(--border-on-ink);border-radius:var(--radius-sm);padding:0.75rem 1rem;color:var(--gray-50);font-family:var(--font-body);font-size:var(--fs-sm);outline:none;transition:border-color var(--dur-fast)" onfocus="this.style.borderColor='var(--lime-400)'" onblur="this.style.borderColor='var(--border-on-ink)'" />
+      </div>
+      <p id="lm-error" style="display:none;color:#f87171;font-size:var(--fs-xs);margin:0"></p>
+      <button id="lm-btn" type="submit" style="background:var(--lime-500);color:var(--ink-900);font-family:var(--font-body);font-size:var(--fs-sm);font-weight:var(--fw-bold);border:none;border-radius:var(--radius-pill);padding:0.875rem 2rem;cursor:pointer;transition:background var(--dur-fast);letter-spacing:-0.01em" onmouseover="this.style.background='var(--lime-400)'" onmouseout="this.style.background='var(--lime-500)'">Quiero el kit gratis →</button>
+    </form>
+    <p style="color:var(--text-on-ink-muted);font-size:var(--fs-xs);margin-top:var(--space-4);text-align:center">Sin spam. Te puedes dar de baja cuando quieras.</p>
+  </div>
+</div>
+
 <script>
 // Sticky nav
 const nav = document.getElementById('nav');
@@ -779,6 +802,66 @@ function toggleMobileMenu(btn) {
 function closeMobileMenu() {
   menuOpen = false;
   document.getElementById('mobile-menu').style.display = 'none';
+}
+
+// Lead magnet modal
+(function() {
+  var KIT_FORM_ID = 'FORM_ID_AQUI';           // ← reemplaza con tu Form ID numérico de Kit
+  var KIT_API_KEY = 'API_KEY_PUBLICA_AQUI';   // ← reemplaza con tu API key pública de Kit
+
+  var shown = sessionStorage.getItem('lm_shown');
+  if (shown) return;
+
+  function openLmModal() {
+    if (sessionStorage.getItem('lm_shown')) return;
+    sessionStorage.setItem('lm_shown', '1');
+    var overlay = document.getElementById('lm-overlay');
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Trigger: 15s delay
+  setTimeout(openLmModal, 15000);
+
+  // Trigger: exit intent (desktop)
+  document.addEventListener('mouseleave', function handler(e) {
+    if (e.clientY < 10) {
+      openLmModal();
+      document.removeEventListener('mouseleave', handler);
+    }
+  });
+})();
+
+function closeLmModal() {
+  document.getElementById('lm-overlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+async function submitLmForm(e) {
+  e.preventDefault();
+  var KIT_FORM_ID = 'FORM_ID_AQUI';
+  var KIT_API_KEY = 'API_KEY_PUBLICA_AQUI';
+  var btn = document.getElementById('lm-btn');
+  var errEl = document.getElementById('lm-error');
+  var email = document.getElementById('lm-email').value.trim();
+  var firstName = document.getElementById('lm-name').value.trim();
+  btn.disabled = true;
+  btn.textContent = 'Enviando…';
+  errEl.style.display = 'none';
+  try {
+    var res = await fetch('https://api.convertkit.com/v3/forms/' + KIT_FORM_ID + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ api_key: KIT_API_KEY, email: email, first_name: firstName })
+    });
+    if (!res.ok) throw new Error('Error ' + res.status);
+    window.location.href = '/descargable';
+  } catch(err) {
+    errEl.textContent = 'Algo salió mal. Intenta de nuevo o escríbenos a hola@dualcomunicaciones.com';
+    errEl.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Quiero el kit gratis →';
+  }
 }
 
 // Form
