@@ -838,12 +838,12 @@ async function submitLmForm(e) {
     var data = new URLSearchParams();
     data.append('email_address', email);
     if (firstName) data.append('fields[first_name]', firstName);
-    var res = await fetch('https://app.convertkit.com/forms/eaa749822d/subscriptions', {
+    await fetch('https://app.convertkit.com/forms/eaa749822d/subscriptions', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: data.toString()
+      body: data.toString(),
+      mode: 'no-cors'
     });
-    if (!res.ok) throw new Error('Error ' + res.status);
     window.location.href = '/descargable';
   } catch(err) {
     errEl.textContent = 'Algo salió mal. Intenta de nuevo o escríbenos a hola@dualcomunicaciones.com';
