@@ -772,6 +772,7 @@ img{display:block;max-width:100%}
     <p style="color:var(--text-on-ink-muted);font-size:var(--fs-xs);margin-top:var(--space-4);text-align:center">Sin spam. Te puedes dar de baja cuando quieras.</p>
   </div>
 </div>
+<iframe id="kit-iframe" name="kit-iframe" style="display:none" aria-hidden="true"></iframe>
 
 <script>
 // Sticky nav
@@ -838,13 +839,20 @@ async function submitLmForm(e) {
     var data = new URLSearchParams();
     data.append('email_address', email);
     if (firstName) data.append('fields[first_name]', firstName);
-    await fetch('https://app.convertkit.com/forms/eaa749822d/subscriptions', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: data.toString(),
-      mode: 'no-cors'
-    });
-    window.location.href = '/descargable';
+    var iframe = document.getElementById('kit-iframe');
+    var form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'https://app.convertkit.com/forms/eaa749822d/subscriptions';
+    form.target = 'kit-iframe';
+    var fEmail = document.createElement('input');
+    fEmail.type = 'hidden'; fEmail.name = 'email_address'; fEmail.value = email;
+    var fName = document.createElement('input');
+    fName.type = 'hidden'; fName.name = 'fields[first_name]'; fName.value = firstName;
+    form.appendChild(fEmail); form.appendChild(fName);
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+    setTimeout(function(){ window.location.href = '/descargable'; }, 800);
   } catch(err) {
     errEl.textContent = 'Algo salió mal. Intenta de nuevo o escríbenos a hola@dualcomunicaciones.com';
     errEl.style.display = 'block';
