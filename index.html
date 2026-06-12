@@ -773,6 +773,10 @@ img{display:block;max-width:100%}
   </div>
 </div>
 <iframe id="kit-iframe" name="kit-iframe" style="display:none" aria-hidden="true"></iframe>
+<form id="kit-hidden-form" method="POST" action="https://app.convertkit.com/forms/eaa749822d/subscriptions" target="kit-iframe" style="display:none" aria-hidden="true">
+  <input id="kit-email-field" type="email" name="email_address" />
+  <input id="kit-name-field" type="text" name="fields[first_name]" />
+</form>
 
 <script>
 // Sticky nav
@@ -826,7 +830,7 @@ function closeLmModal() {
   document.body.style.overflow = '';
 }
 
-async function submitLmForm(e) {
+function submitLmForm(e) {
   e.preventDefault();
   var btn = document.getElementById('lm-btn');
   var errEl = document.getElementById('lm-error');
@@ -835,30 +839,16 @@ async function submitLmForm(e) {
   btn.disabled = true;
   btn.textContent = 'Enviando…';
   errEl.style.display = 'none';
-  try {
-    var data = new URLSearchParams();
-    data.append('email_address', email);
-    if (firstName) data.append('fields[first_name]', firstName);
-    var iframe = document.getElementById('kit-iframe');
-    var form = document.createElement('form');
-    form.method = 'POST';
-    form.action = 'https://app.convertkit.com/forms/eaa749822d/subscriptions';
-    form.target = 'kit-iframe';
-    var fEmail = document.createElement('input');
-    fEmail.type = 'hidden'; fEmail.name = 'email_address'; fEmail.value = email;
-    var fName = document.createElement('input');
-    fName.type = 'hidden'; fName.name = 'fields[first_name]'; fName.value = firstName;
-    form.appendChild(fEmail); form.appendChild(fName);
-    document.body.appendChild(form);
-    form.submit();
-    document.body.removeChild(form);
-    setTimeout(function(){ window.location.href = '/descargable'; }, 800);
-  } catch(err) {
-    errEl.textContent = 'Algo salió mal. Intenta de nuevo o escríbenos a hola@dualcomunicaciones.com';
-    errEl.style.display = 'block';
-    btn.disabled = false;
-    btn.textContent = 'Quiero el kit gratis →';
-  }
+
+  // Rellena y envía el formulario oculto de Kit
+  var kitEmail = document.getElementById('kit-email-field');
+  var kitName = document.getElementById('kit-name-field');
+  kitEmail.value = email;
+  if (kitName) kitName.value = firstName;
+  document.getElementById('kit-hidden-form').submit();
+
+  // Redirige mientras Kit procesa en el iframe
+  setTimeout(function(){ window.location.href = '/descargable'; }, 1000);
 }
 
 // Form
