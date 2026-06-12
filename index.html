@@ -753,11 +753,17 @@ img{display:block;max-width:100%}
 <!-- ===== LEAD MAGNET MODAL ===== -->
 <style>
 /* Kit embed overrides dentro del modal */
-#lm-overlay .formkit-form { background: transparent !important; border: none !important; padding: 0 !important; box-shadow: none !important; }
-#lm-overlay .formkit-form * { font-family: 'Archivo', system-ui, sans-serif !important; }
+#lm-overlay .formkit-form { background: transparent !important; border: none !important; padding: 0 !important; box-shadow: none !important; max-width: 100% !important; }
+#lm-overlay .formkit-form * { font-family: 'Archivo', system-ui, sans-serif !important; box-sizing: border-box !important; }
+#lm-overlay .formkit-field,
+#lm-overlay .formkit-fields { display: block !important; width: 100% !important; margin-bottom: 1rem !important; }
 #lm-overlay .formkit-field input,
 #lm-overlay .formkit-form input[type=email],
-#lm-overlay .formkit-form input[type=text] {
+#lm-overlay .formkit-form input[type=text],
+#lm-overlay input.formkit-input {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
   background: var(--ink-800) !important;
   border: 1px solid rgba(238,241,245,0.16) !important;
   border-radius: 10px !important;
@@ -765,10 +771,15 @@ img{display:block;max-width:100%}
   padding: 0.75rem 1rem !important;
   font-size: 0.9375rem !important;
   width: 100% !important;
+  height: auto !important;
   box-shadow: none !important;
+  margin: 0 !important;
 }
 #lm-overlay .formkit-form input::placeholder { color: rgba(238,241,245,0.35) !important; }
-#lm-overlay .formkit-submit, #lm-overlay .formkit-form button[type=submit] {
+#lm-overlay .formkit-submit,
+#lm-overlay .formkit-form button[type=submit],
+#lm-overlay button.formkit-submit {
+  display: block !important;
   background: #C9E63B !important;
   color: #181B20 !important;
   font-weight: 700 !important;
@@ -780,12 +791,15 @@ img{display:block;max-width:100%}
   cursor: pointer !important;
   box-shadow: none !important;
   letter-spacing: -0.01em !important;
+  margin-top: 0.5rem !important;
 }
 #lm-overlay .formkit-submit:hover { background: #D7ED5C !important; }
-#lm-overlay .formkit-guarantee, #lm-overlay .formkit-powered-by-convertkit-container { display: none !important; }
-#lm-overlay .formkit-header, #lm-overlay .formkit-subheader { display: none !important; }
-#lm-overlay .formkit-fields { display: grid; gap: 1rem; }
-#lm-overlay [data-style=full] { width: 100% !important; min-width: unset !important; max-width: unset !important; }
+#lm-overlay .formkit-guarantee,
+#lm-overlay .formkit-powered-by-convertkit-container,
+#lm-overlay .formkit-header,
+#lm-overlay .formkit-subheader { display: none !important; }
+#lm-overlay [data-style=full] { width: 100% !important; min-width: unset !important; max-width: 100% !important; }
+#lm-overlay .formkit-alert { color: #f87171 !important; font-size: 0.8125rem !important; margin-bottom: 0.5rem !important; }
 </style>
 <div id="lm-overlay" role="dialog" aria-modal="true" aria-labelledby="lm-title" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(24,27,32,0.72);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:var(--space-5)">
   <div style="background:var(--ink-900);border:1px solid var(--border-on-ink);border-radius:var(--radius-xl);max-width:520px;width:100%;padding:clamp(2rem,5vw,3rem);position:relative;box-shadow:var(--shadow-pop)">
