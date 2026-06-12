@@ -864,6 +864,20 @@ function closeLmModal() {
   document.body.style.overflow = '';
 }
 
+// Fuerza visibilidad del input de Kit una vez que renderiza
+(function() {
+  var inputStyles = 'display:block!important;visibility:visible!important;opacity:1!important;width:100%!important;height:auto!important;position:static!important;clip:auto!important;background:#23272E!important;border:1px solid rgba(238,241,245,0.16)!important;border-radius:10px!important;color:#EEF1F5!important;padding:0.75rem 1rem!important;font-size:0.9375rem!important;margin-bottom:1rem!important;box-shadow:none!important;';
+  function fixKitInput() {
+    var overlay = document.getElementById('lm-overlay');
+    if (!overlay) return;
+    var inputs = overlay.querySelectorAll('input[type=email], input[name=email_address], .formkit-input');
+    inputs.forEach(function(inp) { inp.style.cssText = inputStyles; inp.placeholder = 'tu@correo.com'; });
+  }
+  var obs = new MutationObserver(function() { fixKitInput(); });
+  obs.observe(document.body, { childList: true, subtree: true });
+  setInterval(fixKitInput, 500);
+})();
+
 // Form
 function handleSubmit(e) {
   e.preventDefault();
